@@ -1,7 +1,27 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+**/__pycache__/
 *.py[cod]
+*.pyc
+*.pyo
 *$py.class
+
+# Test and Python cache artifacts
+.pytest_cache/
+**/.pytest_cache/
+.pytype/
+.mypy_cache/
+**/.mypy_cache/
+.ruff_cache/
+**/.ruff_cache/
+coverage.xml
+.coverage
+.coverage.*
+
+# Explicit project cache folders
+**/__pycache__/
+**/.pytest_cache/
+**/.cache/
 
 # C extensions
 *.so
