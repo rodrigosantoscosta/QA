@@ -1,0 +1,153 @@
+[ESTES SÃO OS CENÁRIOS QUE UM ALUNO INICIANTE PROVAVELMENTE ESCREVERIA, SEM PENSAR AINDA NOS LIMITES EXATOS COMO 18 OU 500]
+
+============================================================
+MÓDULO 1: validador_conta.py (Abertura de Conta)
+============================================================
+
+Cenários de Teste Pensados (Fase 1 - Ingénua):
+
+Cenário 1: Tudo Perfeito (Caminho Feliz)
+- Dados: Idade = 25, Score = 800
+- Esperado: Aprovado
+
+Cenário 2: Tem idade, mas o score é muito baixo
+- Dados: Idade = 30, Score = 200
+- Esperado: Recusado
+
+Cenário 3: É muito novo, mas tem score alto (imaginando um cenário)
+- Dados: Idade = 15, Score = 900
+- Esperado: Erro (Menor de idade)
+
+Cenário 4: É muito novo e também tem score baixo
+- Dados: Idade = 10, Score = 100
+- Esperado: Erro (Menor de idade)
+
+============================================================
+MÓDULO 2: validar_transferencia_pix.py (Transferência PIX)
+============================================================
+
+--- Casos Básicos ---
+
+Cenário 5: Transferência válida (Caminho Feliz)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=10
+- Esperado: Aprovado
+
+Cenário 6: Saldo exatamente igual ao valor
+- Dados: Saldo=500, Valor=500, Destino="123456", Limite=2000, Horário=10
+- Esperado: Aprovado
+
+Cenário 7: Limite diário exato
+- Dados: Saldo=10000, Valor=2000, Destino="123456", Limite=2000, Horário=10
+- Esperado: Aprovado
+
+Cenário 8: Horário início comercial (9h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=9
+- Esperado: Aprovado
+
+Cenário 9: Horário fim comercial (18h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=18
+- Esperado: Aprovado
+
+Cenário 10: Saldo insuficiente
+- Dados: Saldo=100, Valor=500, Destino="123456", Limite=2000, Horário=10
+- Esperado: Recusado
+
+Cenário 11: Valor zero
+- Dados: Saldo=1000, Valor=0, Destino="123456", Limite=2000, Horário=10
+- Esperado: Recusado
+
+Cenário 12: Valor negativo
+- Dados: Saldo=1000, Valor=-100, Destino="123456", Limite=2000, Horário=10
+- Esperado: Recusado
+
+Cenário 13: Excede limite diário
+- Dados: Saldo=10000, Valor=5000, Destino="123456", Limite=2000, Horário=10
+- Esperado: Recusado
+
+--- Valores Extremos ---
+
+Cenário 14: Transferência de 1 centavo
+- Dados: Saldo=100, Valor=0.01, Destino="123456", Limite=200, Horário=10
+- Esperado: Aprovado
+
+Cenário 15: Transferência de R$ 1.000.000
+- Dados: Saldo=99999999, Valor=1000000, Destino="123456", Limite=2000000, Horário=10
+- Esperado: Aprovado
+
+Cenário 16: Valor gigante vs saldo mínimo
+- Dados: Saldo=1, Valor=999999999, Destino="123456", Limite=1000000000, Horário=10
+- Esperado: Recusado
+
+--- Boundary Conditions ---
+
+Cenário 17: Saldo zero e valor zero
+- Dados: Saldo=0, Valor=0, Destino="123456", Limite=100, Horário=10
+- Esperado: Recusado
+
+Cenário 18: Limite zero com valor positivo
+- Dados: Saldo=100, Valor=1, Destino="123456", Limite=0, Horário=10
+- Esperado: Recusado
+
+Cenário 19: Saldo negativo (conta negativada)
+- Dados: Saldo=-500, Valor=100, Destino="123456", Limite=1000, Horário=10
+- Esperado: Recusado
+
+Cenário 20: Saldo positivo mas limite zero
+- Dados: Saldo=500, Valor=100, Destino="123456", Limite=0, Horário=10
+- Esperado: Recusado
+
+--- Exceções (ValueError) ---
+
+Cenário 21: Conta destino vazia
+- Dados: Saldo=1000, Valor=500, Destino="", Limite=2000, Horário=10
+- Esperado: Erro (Conta de destino não informada)
+
+Cenário 22: Conta destino nula
+- Dados: Saldo=1000, Valor=500, Destino=None, Limite=2000, Horário=10
+- Esperado: Erro (Conta de destino não informada)
+
+Cenário 23: Conta destino só espaços
+- Dados: Saldo=1000, Valor=500, Destino="   ", Limite=2000, Horário=10
+- Esperado: Erro (Conta de destino não informada)
+
+Cenário 24: Conta destino com caracteres especiais
+- Dados: Saldo=1000, Valor=500, Destino="!@#$%", Limite=2000, Horário=10
+- Esperado: Erro (Conta de destino com caracteres inválidos)
+
+Cenário 25: Conta destino com emoji
+- Dados: Saldo=1000, Valor=500, Destino="💀", Limite=2000, Horário=10
+- Esperado: Erro (Conta de destino com caracteres inválidos)
+
+Cenário 26: Horário antes do comercial (8h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=8
+- Esperado: Erro (Transferência fora do horário comercial)
+
+Cenário 27: Horário após o comercial (19h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=19
+- Esperado: Erro (Transferência fora do horário comercial)
+
+Cenário 28: Horário absurdo (25h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=25
+- Esperado: Erro (Transferência fora do horário comercial)
+
+Cenário 29: Horário negativo
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=-5
+- Esperado: Erro (Transferência fora do horário comercial)
+
+Cenário 30: Horário 99h
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=99
+- Esperado: Erro (Transferência fora do horário comercial)
+
+Cenário 31: Horário zero (meia-noite)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=0
+- Esperado: Erro (Transferência fora do horário comercial)
+
+--- Horário Fracionário ---
+
+Cenário 32: Horário fracionário antes (8.99h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=8.99
+- Esperado: Erro (Transferência fora do horário comercial)
+
+Cenário 33: Horário fracionário depois (18.01h)
+- Dados: Saldo=1000, Valor=500, Destino="123456", Limite=2000, Horário=18.01
+- Esperado: Erro (Transferência fora do horário comercial)
