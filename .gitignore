@@ -153,3 +153,6 @@ dmypy.json
 # Project specific
 .env.local
 *.tmp
+
+# Repositorios aninhados (clonados dentro deste repo - nao devem virar submodulos)
+api_rest_teste_unit_integration/
