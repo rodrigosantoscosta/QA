@@ -1,0 +1,2 @@
+# Scaffold do projeto Cypress
+
